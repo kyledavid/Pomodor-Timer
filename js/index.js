@@ -1,16 +1,13 @@
 $(document).ready(function(){
   
-  var counting = 0;
-  var height = 0;
-  var seconds = 0;
+  var counting = false;
+  var filledHeight = 0;
+  var elapsedSeconds = 0;
   var myTime,increments;
-  var bminutes = 5;
-  var minutes = 25;
-  var pminutes = 25;
-  var takeBreak = false;
-
-
-  
+  var breakMinutes = 5;
+  var timerMinutes = 25;
+  var pomoMinutes = 25;
+  var breakMode = false;
 
   
   /*==========================
@@ -19,30 +16,30 @@ $(document).ready(function(){
   
   $('.empty-circle').click(function(){
     
-    if(counting == 0){
+    if(counting === false){
       initClock();
+      updateClock();
     }
     else{
       clearInterval(myTime);
-      counting = 0;
+      counting = false;
     }
   });
   
   $('#clear').click(function(){
     resetClock();
-    
   });
   
-  $('.toBreak').click(function(){
-    if(takeBreak == false){
+  $('.start-break').click(function(){
+    if(breakMode === false){
       resetClock();
       initBreak();
     }
     
   });
   
-  $('.toPomo').click(function(){
-    if(takeBreak == true){
+  $('.start-pomo').click(function(){
+    if(breakMode === true){
       resetClock();
       initPomodoro();
     }
@@ -54,62 +51,77 @@ $(document).ready(function(){
   /* ===================== FUNCTIONS ==============================================*/
   
   function initClock(){
-    if(takeBreak == true){minutes = bminutes;}
-    else{minutes = pminutes;}
+    if(breakMode == true){
+      timerMinutes = breakMinutes;
+    } else {
+      timerMinutes = pomoMinutes;
+    }
     
     myTime  = setInterval(countTime, 1000);
-    counting = 1;
-    increments = 280 / (minutes * 60 - 1);
+    counting = true;
+    increments = 280 / (timerMinutes * 60 - 1);
   }
   
   
   function resetClock(){
-    height = 0;
-    seconds = 0;
-    counting = 0;
+    filledHeight = 0;
+    elapsedSeconds = 0;
+    counting = false;
     clearInterval(myTime);
     $('.fill-circle').css({"height":"0px"});
-    $('.time').html("");
+    $('.time').html("Click to Start Timer");
     
   };
   
   
-  
   function initBreak(){
     $('.fill-circle').css({"background-color" : "#0099ff"}); 
-    takeBreak = true;
+    breakMode = true;
     $('.status').html("BREAK");
     
   }
   
   function initPomodoro(){
     $('.fill-circle').css({"background-color" : "#00e673"});
-    takeBreak = false;
+    breakMode = false;
     $('.status').html("POMODORO");
   }
   
 
   /* ================== CLOCK DISPLAY ==========*/
+
+  function updateClock() {
+    var timerHTML = [];
+
+    timerHTML = ["Time Left: " + convertTime(),  filledHeight + "px"];
+    $('.time').html(timerHTML[0]);
+    $('.fill-circle').css({"height": timerHTML[1]});
+  }
   
   function countTime(){
-    seconds +=1;
-    height += increments;
-    var message = ["Time Left: " + convertTime(),  height + "px"];
-    $('.time').html(message[0]);
-    $('.fill-circle').css({"height": message[1]});
+
+    elapsedSeconds +=1;
+    filledHeight += increments;
+    
+    updateClock();
     
     if(timeRemain() <= 0){
       playSound();
       resetClock();
-      if(takeBreak == false){initBreak();}
-      else{initPomodoro();}
+
+      if(breakMode == false){
+        initBreak();
+      } else {
+        initPomodoro();
+      }
+
       initClock();
     }
     
   };
   
   function timeRemain(){
-    var t = minutes * 60 - seconds;
+    var t = timerMinutes * 60 - elapsedSeconds;
     //$('#testarea').text(t);
     return t;
   }
@@ -133,31 +145,31 @@ $(document).ready(function(){
   /*=======================================ADD AND SUBTRACT MINUTES==========================================*/
   
   $('.add').click(function(){
-    pminutes += 1;
-    $('.minutes').html("POMO TIME IS : " + pminutes);
-    if(takeBreak == false){resetClock();}
+    pomoMinutes += 1;
+    $('.pomo-minutes').html("POMO TIMER LENGTH : " + pomoMinutes);
+    if(breakMode == false){resetClock();}
   });
   
   $('.subtract').click(function(){
-    if(pminutes > 1){
-      pminutes -= 1;
+    if(pomoMinutes > 1){
+      pomoMinutes -= 1;
     }
-    if(takeBreak == false){resetClock();}
-    $('.minutes').html("POMO TIME IS : " + pminutes);
+    if(breakMode == false){resetClock();}
+    $('.pomo-minutes').html("POMO TIMER LENGTH : " + pomoMinutes);
   });
   
-  $('.badd').click(function(){
-    bminutes += 1;
-    $('.bminutes').html("BREAK TIME IS: " + bminutes);
-    if(takeBreak == true){resetClock();}
+  $('.break-add').click(function(){
+    breakMinutes += 1;
+    $('.break-minutes').html("BREAK TIMER LENGTH: " + breakMinutes);
+    if(breakMode == true){resetClock();}
   });
   
-  $('.bsubtract').click(function(){
-    if(bminutes > 1){
-      bminutes -= 1;
+  $('.break-subtract').click(function(){
+    if(breakMinutes > 1){
+      breakMinutes -= 1;
     }
-    if(takeBreak == true){resetClock();}
-    $('.bminutes').html("BREAK TIME IS: " + bminutes);
+    if(breakMode == true){resetClock();}
+    $('.break-minutes').html("BREAK TIMER LENGTH: " + breakMinutes);
   });
   
   

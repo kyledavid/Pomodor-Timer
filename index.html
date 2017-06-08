@@ -2,7 +2,7 @@
 <html >
 <head>
   <meta charset="UTF-8">
-  <title>A Pen by  Kyle</title>
+  <title>A Pen by Kyle</title>
   
   
   
@@ -17,33 +17,35 @@
   <div class="timer">
     
     <span class="empty-circle">
-      <div class="status">POMODORO</div>
-      <span class="time"></span>
+      <h3 class="status">POMODORO</h3>
+      <span class="time">Click to Start Timer</span>
       <span class="fill-circle"></span>
     </span>
     
-    <button class="btn toBreak">Break</button>
-    <button class="btn toPomo">Pomodoro</button>
+    <button class="btn start-break">Break Timer</button>
+    <button class="btn start-pomo">Pomodoro Timer</button>
 
   </div><!-- TIMER -->
   
-  <div class="errything">
+  <main class="main-content">
     
     <h1>POMODORO TIMER</H1>
-    
-    <button class="box-button subtract">-</button>
-    <span class="minutes"> POMO TIME IS : 25</span>
-    <button class="box-button add">+</button>
-    <br>
+    <div class="minute-controls">
+      <button class="box-button subtract">-</button>
+      <span class="pomo-minutes"> POMO TIMER LENGTH : 25</span>
+      <button class="box-button add">+</button>
+    </div>
 
-    
-    <button class="box-button bsubtract">-</button>
-    <span class="bminutes"> BREAK TIME IS: 5</span>  
-    <button class="box-button badd">+</button>
-  <br>
+    <div class="minute-controls">
+      <button class="box-button break-subtract">-</button>
+      <span class="break-minutes"> BREAK TIMER LENGTH: 5</span>  
+      <button class="box-button break-add">+</button>
+    </div>
+
     <button class="box-button" id="clear">CLEAR</button>
     <div id="testarea"></div>
-  </div><!-- errything -->
+    
+  </main><!-- errything -->
 
 
   <div class="sound"></div>

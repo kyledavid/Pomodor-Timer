@@ -14,7 +14,7 @@ body{
   
 }
 
-.errything{
+.main-content{
   float: left;
   width: 62%;
 }
@@ -23,17 +23,17 @@ body{
   margin: 10px;
   height: 50px;
   padding: 0px 20px;
-  border-radius: 10%;
+  border-radius: 5%;
   border: 5px solid black;
   font-size: 22px;
   color:white;
 }
 
-.toBreak{
+.start-break{
   background-color: #0099ff;
 }
 
-.toPomo{
+.start-pomo{
   background-color: #00b358;
 }
 
@@ -78,6 +78,10 @@ body{
   bottom: 0px;
   z-index: 1;
   
+}
+
+.minute-controls {
+  user-select: none;
 }
 
 /** ====================MEDIA QUERIES=====
