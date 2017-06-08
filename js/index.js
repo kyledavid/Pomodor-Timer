@@ -10,15 +10,13 @@ $(document).ready(function(){
   var breakMode = false;
 
   
-  /*==========================
-    =================== click events
-      ======================================*/
+  /** ==== Click Events ==== **/
   
   $('.empty-circle').click(function(){
     
     if(counting === false){
       initClock();
-      updateClock();
+      updateViewableClock();
     }
     else{
       clearInterval(myTime);
@@ -45,10 +43,25 @@ $(document).ready(function(){
     }
     
   });
+
+  /** ==== Switch Between Modes ====**/
+
+  function initBreak(){
+    $('.fill-circle').css({"background-color" : "#0099ff"}); 
+    $('.status').css({"color" : "#0099ff"}); 
+    breakMode = true;
+    $('.status').html("BREAK");
+    
+  }
   
+  function initPomodoro(){
+    $('.fill-circle').css({"background-color" : "#00e673"});
+    $('.status').css({"color" : "#00e673"});
+    breakMode = false;
+    $('.status').html("POMODORO");
+  }
   
-  
-  /* ===================== FUNCTIONS ==============================================*/
+  /** ==== Clock Functions ==== **/
   
   function initClock(){
     if(breakMode == true){
@@ -73,26 +86,8 @@ $(document).ready(function(){
     
   };
   
-  
-  function initBreak(){
-    $('.fill-circle').css({"background-color" : "#0099ff"}); 
-    $('.status').css({"color" : "#0099ff"}); 
-    breakMode = true;
-    $('.status').html("BREAK");
-    
-  }
-  
-  function initPomodoro(){
-    $('.fill-circle').css({"background-color" : "#00e673"});
-    $('.status').css({"color" : "#00e673"});
-    breakMode = false;
-    $('.status').html("POMODORO");
-  }
-  
 
-  /* ================== CLOCK DISPLAY ==========*/
-
-  function updateClock() {
+  function updateViewableClock() {
     var timerHTML = [];
 
     timerHTML = ["Time Left: " + convertTime(),  filledHeight + "px"];
@@ -105,7 +100,7 @@ $(document).ready(function(){
     elapsedSeconds +=1;
     filledHeight += increments;
     
-    updateClock();
+    updateViewableClock();
     
     if(timeRemain() <= 0){
       playSound();
@@ -144,7 +139,7 @@ $(document).ready(function(){
     $('.sound').html('<audio autoplay><source src="https://sfxcontent.s3.amazonaws.com/soundfx/AirplaneChime-DingDong.mp3" type="audio/mpeg">  </audio>');
   }
   
-  /*=======================================ADD AND SUBTRACT MINUTES==========================================*/
+  /** ==== Timer Length Click Events ====**/
   
   $('.add').click(function(){
     pomoMinutes += 1;
