@@ -76,6 +76,7 @@ $(document).ready(function(){
   
   function initBreak(){
     $('.fill-circle').css({"background-color" : "#0099ff"}); 
+    $('.status').css({"color" : "#0099ff"}); 
     breakMode = true;
     $('.status').html("BREAK");
     
@@ -83,6 +84,7 @@ $(document).ready(function(){
   
   function initPomodoro(){
     $('.fill-circle').css({"background-color" : "#00e673"});
+    $('.status').css({"color" : "#00e673"});
     breakMode = false;
     $('.status').html("POMODORO");
   }

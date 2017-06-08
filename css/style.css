@@ -1,5 +1,5 @@
 body{
-  background-color: #333;
+  background-color: #bbb;
   color:white;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 25px;
@@ -19,14 +19,19 @@ body{
   width: 62%;
 }
 
-.btn{
-  margin: 10px;
-  height: 50px;
-  padding: 0px 20px;
-  border-radius: 5%;
-  border: 5px solid black;
-  font-size: 22px;
-  color:white;
+.start-break,
+.start-pomo {
+  display: block; 
+  margin-bottom: 1px;
+}
+
+.btn, 
+.box-button{
+  border:none;
+  background-color:#333;
+  font-size: 25px;
+  color:#fff;
+  text-transform: uppercase;
 }
 
 .start-break{
@@ -36,16 +41,6 @@ body{
 .start-pomo{
   background-color: #00b358;
 }
-
-
-.box-button{
-  border:none;
-  background-color:#333;
-  font-size: 25px;
-  color:#fff;
-}
-
-
 
 .empty-circle{
   margin: 0 auto;
@@ -60,9 +55,12 @@ body{
 }
 
 .status{
-  margin-top: 120px;
+  background-color: #333;
   z-index:5;
   position:relative;
+  margin-top: 120px;
+  margin-bottom: 5px;
+  color: #00e673;
 }
 .time{
   position:relative;
